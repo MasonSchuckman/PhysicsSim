@@ -11,16 +11,17 @@ public class start {
 	public static ArrayList<TrackingPoint> trackers;
 	public static camControls controls; //controls for the camera
 	public static playerControls Pcontrols;	
-
+	public static final float TIMESCALE=.3f;
+	public static int [] camPos;
 	public static void main(String [] args) throws IOException 	{
 		//use presets.<preset here> to make the objects and universe.
 		//use .manEdit in to make new presets
 		//use .testing in to test various things
-		//list=presets.preset6();
+		//list=presets.preset2();
 		list=presets.testing();		
 		//list=presets.manEdit();	
-		System.out.println(list.size()); //prints the particles in the simulation
-		
+		System.out.println("Objects in simulation: "+list.size()); //prints the particles in the simulation
+		camPos=presets.camPos;
 		uni=presets.uni;
 		trackers=presets.trackers;
 		if(!trackers.isEmpty())uni.turnOnMotionControls(); //if at least 1 light tracker is present, turn on optical motion controls.

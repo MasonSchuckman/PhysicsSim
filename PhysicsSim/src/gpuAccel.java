@@ -59,8 +59,9 @@ public class gpuAccel extends Kernel {
 			
 			if (gid != i) { // this "if" is the replacement for the continue statement to skip an Object
 							// calcing grav on itself
-
+				
 				 mass2 = mass[i];
+				 if(mass2<10&&mass1<10) continue;//small objects dont act on each other
 				 x2 = X[i];
 				 y2 = Y[i];
 				 z2 = Z[i];

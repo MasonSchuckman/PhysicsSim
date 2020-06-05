@@ -128,7 +128,7 @@ public class fieldDrawer extends Thread{
 	public void useGPU() {		
 		vis=new fieldGPU(X,Y,Z,mag,pitch,yaw,mass,grav,G,bX,bY,bZ);		
 		GPU=true;
-		vis.setExecutionMode(Kernel.EXECUTION_MODE.CPU);
+		//vis.setExecutionMode(Kernel.EXECUTION_MODE.CPU);
 		range=Range.create(counter);
 		//System.out.println("Device = " + vis.getTargetDevice().toString()+"     "+vis.getKernelState());
 	}

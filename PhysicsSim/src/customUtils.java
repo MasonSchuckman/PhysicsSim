@@ -181,4 +181,23 @@ public class customUtils {
 		
 		
 	}
+	/* this method is for adding the spheres to the group ( pre calculated trajectories only )
+	*/
+	public static void addStuff(Group root,ArrayList<ModelSphere> obs) {
+
+		// Takes each Object in the arrayList, and creates Spheres inside the object's
+		// instance data. This is used for cleaner drawing methods; less clutter.
+		for (int i = 0; i < obs.size(); i++) {
+			
+			Sphere s = obs.get(i);
+			
+			//sets the color of all the balls to the randomized values at each object's declaration
+			PhongMaterial ballColor = new PhongMaterial();		    
+		    ballColor.setSpecularColor(javafx.scene.paint.Color.rgb(200, 60, 60, 1));
+		    ballColor.setDiffuseColor(javafx.scene.paint.Color.rgb(200, 60, 60, 1));		    
+			s.setMaterial(ballColor);
+			
+			root.getChildren().add(s);
+		}
+	}
 }

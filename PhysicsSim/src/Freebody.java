@@ -5,8 +5,10 @@ public class Freebody extends GameObject{
     {
 		super(Vi,angle,currentX,currentY,currentZ);
     	fxColor= javafx.scene.paint.Color.rgb(230, 230, 100, 1);
+    	fxColor= javafx.scene.paint.Color.rgb(200, 60, 60, 1);
     	if(drag==1||mass>1000)fxColor= javafx.scene.paint.Color.rgb(60, 60, 200, 1);
     	if(mass<0)fxColor= javafx.scene.paint.Color.rgb(200, 60, 60, 1);
+    	
         this.mass=mass;
         this.w=w;
         this.drag=drag;

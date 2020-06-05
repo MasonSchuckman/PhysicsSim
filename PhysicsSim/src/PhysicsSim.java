@@ -57,8 +57,7 @@ public class PhysicsSim {
 		}
 		 G= (float) (6.674*Math.pow(11,G));
 		 GP=new gpuAccel(size,x,y,z,xV,yV,zV,mass,drag,(float)G,(float) grav);
-		 //forces GPU(supposedly)(it WILL still lag spike at times, doesnt switch to cpu though)
-		// GP.setExecutionMode(Kernel.EXECUTION_MODE.CPU);
+		 
 		// if there aren't any bounds set(universe unlimited), then don't check for
 		// collisions with walls
 		if (properties.isBounds() == false) {

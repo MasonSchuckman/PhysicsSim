@@ -9,28 +9,30 @@ public class presets {
 	private static ArrayList<Freebody> list;
 	public static WorldCreator uni;
 	public static ArrayList<TrackingPoint>trackers;
-	
+	public static int [] camPos;
 	//each preset calls this method so that with future additions, no null pointer exceptions
 	//are thrown when attempting to access a feature that was not yet present when the preset was made.
 	public static void initializePreqs() { 
 		list = new ArrayList<Freebody>();
 		trackers = new ArrayList<TrackingPoint>();
+		camPos=new int[3];
 	}
 	
 	public static ArrayList<Freebody> testing(){
 		
 		initializePreqs();
-		int size       = 20;      
+		int size       = 5;      
 		float bounce  = 1; 
 		float drag    = 0;		
 		int locX,locY,locZ;		
 		int dis        = 500;			
-		float mainMass= 100;	
+		float mainMass= 1000000;	
+		
 		int worldSize  = 0;		
 		
 		if(worldSize!=0) { locX=worldSize/2;locY=worldSize/2;locZ=worldSize/2; } 
 		else { locX=1000;locY=1000;locZ=1000; }		
-		//list.add(new Freebody(50, 1,mainMass,locX,locY,locZ,     (int)(size)*1, bounce, 1)); 
+		list.add(new Freebody(0, 1,mainMass,locX,locY,locZ,     (int)(size)*10, bounce, 0)); 
 		//list.add(new Freebody(50, 1,1,locX+dis,locY,locZ,     (int)(size)*1, bounce, 1)); 
 		//list.add(new Freebody(50, 1,1,locX-dis,locY,locZ,     (int)(size)*1, bounce, 1)); 
 		//trackers.add(new TrackingPoint(locX,locY,locZ,    (int)(size),0));//controller 1
@@ -39,17 +41,19 @@ public class presets {
 		boolean usingShapeCreator=true;
 		if(usingShapeCreator) {
 			ShapeCreator s=new ShapeCreator();
-			int spacer=10;
+			int spacer=1;
 			int[][]p=s.getPoints(spacer);
-			int multi=8;
+			int multi=10;
 			int x=0;
 			int y=0;
 			int num=0;
 			int xmax=0;
 			int ymax=0;
 			for(int i[]:p) {
-				list.add(new Freebody(0, 0,mainMass,locX+(i[0]*multi),locY+(i[1]*multi),locZ,(int)(size)*1, bounce, 0)); 
 				num++;
+				list.add(new Freebody(0, 0,1,locX+(i[0]*multi),locY+(i[1]*multi),locZ,(int)(size)*1, bounce, 0)); 
+				list.get(num).setVel(0,0,350);
+				
 				x+=i[0]*multi;
 				y+=i[1]*multi;
 				xmax=Math.max(xmax, i[0]*multi);
@@ -58,7 +62,10 @@ public class presets {
 			System.out.println(xmax);
 			int xAvg=x/num;
 			int yAvg=y/num;
-			uni = new WorldCreator(worldSize, worldSize, worldSize, 0,1,locX+xAvg,locY+yAvg,locZ+(int)(xmax/1.3));
+			camPos[0]=locX+xAvg;
+			camPos[1]=locY+yAvg;
+			camPos[2]=locZ+(int)(xmax/1.3);
+			uni = new WorldCreator(worldSize, worldSize, worldSize, 0,2.3f,locX+xAvg,locY+yAvg,locZ+(int)(xmax/1.3));
 		}else
 			uni = new WorldCreator(worldSize, worldSize, worldSize, 0,1,locX,locY,locZ);
 		
@@ -67,6 +74,7 @@ public class presets {
 		
 		return list;
 	}
+	
 	
 	public static ArrayList<Freebody> manEdit(){
 			initializePreqs();
@@ -119,19 +127,19 @@ public class presets {
 			//list.get(0).makeController(50);
 			//variable to make it easier to change the # of particles
 			int c;
-		    /*===================================================
-			below is explaining how to setup the particles around the center mass.
-			make symmetry with 1000 open space on both sides
-			worldsize-2000=usable space
-			c*2*d is space used by objects
-			worldsize-2000=c*2*d
-			d=(worldsize-2000)/(2c)
-			starting x is 1000.
-			
-			y starting is so that c/2 is at locY.
-			worldSize/2=y+(c/2*d)
-			y starting = (worldSize/2)-(c/2*d)
-			END of explanation
+		    /**
+			*below is explaining how to setup the particles around the center mass.
+			*make symmetry with 1000 open space on both sides
+			*worldsize-2000=usable space
+			*c*2*d is space used by objects
+			*worldsize-2000=c*2*d
+			*d=(worldsize-2000)/(2c)
+			*starting x is 1000.
+			*
+			*y starting is so that c/2 is at locY.
+			*worldSize/2=y+(c/2*d)
+			*y starting = (worldSize/2)-(c/2*d)
+			*END of explanation
 			*/
 			c=0;
 			if(c!=0) {
@@ -646,7 +654,7 @@ public class presets {
 		int ang=30;
 		
 		//variable to make it easier to change the # of particles
-		int c=35; 
+		int c=80; 
 		
 		//make symmetry with 1000 open space on both sides
 		//worldsize-2000=usable space

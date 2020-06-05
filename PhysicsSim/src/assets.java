@@ -17,8 +17,13 @@ public class assets {
 	public ArrayList<PointLight> wallLights;	 //lights if there are borders, these are typically to be placed on the walls of the scene
 	public ArrayList<PointLight> locationLights; //lights if there are no universe borders, these are centered around the "action" of the scene
 	private boolean locDef;
-	public assets() {
-		locDef=start.uni.locationIsDefined();
+	private boolean recordedSim=false;
+	public assets(boolean recorded) {
+		recordedSim=recorded;
+		if(!recorded)
+			locDef=start.uni.locationIsDefined();
+		else
+			locDef=true;
 	}
 
 	public Group Assets() {
@@ -249,10 +254,18 @@ public class assets {
 
 	private void addLocationLights() { //adds the Lights of the scene if borders are off.
 		locationLights=new ArrayList<PointLight>();
-		double w=start.uni.getLocX();
-		double h=start.uni.getLocY();
-		double d=start.uni.getLocZ();
-		
+		double w;
+		double h;
+		double d;
+		if(recordedSim) {
+			w=SimulationReader.cameraPos[0];
+			h=SimulationReader.cameraPos[1];
+			d=SimulationReader.cameraPos[2];
+		}else {
+			w=start.uni.getLocX();
+			h=start.uni.getLocY();
+			d=start.uni.getLocZ();
+		}
 		int away=1500;          //how far away(z direction) the camera starts from the action
 		makeCamera(w,h,d-away); //makes the camera looking at the scene
 		
