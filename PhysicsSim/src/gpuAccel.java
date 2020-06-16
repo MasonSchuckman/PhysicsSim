@@ -88,7 +88,7 @@ public class gpuAccel extends Kernel {
 			float particleGravZ = fz / mass1;
 			
 			float gravchange1 = -(particleGravX * elapSec); 					// this is for x1
-			float gravchange2 = -(particleGravY * elapSec) -grav * elapSec ; // this is for y1
+			float gravchange2 = -(particleGravY * elapSec) -grav * elapSec ;  	// this is for y1
 			float gravchange3 = -(particleGravZ * elapSec); 					// this is for z1
 
 			float xv1 = vX[gid];
@@ -121,8 +121,10 @@ public class gpuAccel extends Kernel {
 	public void Collision(float[]pos,float[]vels,int i) {			
 			X[i] =pos [0];
 			vX[i]=vels[0];
+			
 			Y[i] =pos [1];
 			vY[i]=vels[1];
+			
 			Z[i] =pos [2];
 			vZ[i]=vels[2];	
 	}

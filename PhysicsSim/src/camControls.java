@@ -60,7 +60,7 @@ public class camControls {
     	
         theta=Math.toRadians(theta);
         //System.out.println(theta);
-    	double swivelSpeed=.006;
+    	double swivelSpeed=.0006;
         if (w) {
         	dz += swivelSpeed*2*Math.cos(theta);
         	dx += swivelSpeed*2*Math.sin(theta);

@@ -30,12 +30,20 @@ class MyCanvas extends JComponent {
     	repaint();
     }
 }
+/*
+ * ShapeCreator.java is made to turn a .png (primarily a paint drawing right now) into a an 
+ * ArrayList of Freebodies. 
+ * Simply to go /dependencies/images/, draw something in paint, name it "drawing.png",
+ * make sure the "shapeCreator" setting is turned on in the preset testing, and that testing is selected
+ * in start.java, and you're good to go!
+ * 
+ */
 public class ShapeCreator {
 	public ShapeCreator() {
 		
 	}
 	public  int[][]getPoints(int spacer){
-		File imageFile = new File("C:\\Users\\suprm\\test.png");
+		File imageFile = new File("./dependencies/images/drawing.png");
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(imageFile);
@@ -43,7 +51,7 @@ public class ShapeCreator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		MyCanvas can=new MyCanvas();
+		//MyCanvas can=new MyCanvas();
 		
 		
         int cooldown=spacer;
@@ -72,6 +80,9 @@ public class ShapeCreator {
 		}
 		return p;
 	}
+	
+	//this was all for testing it. Currently it just draws what the program scanned in as freebody locations.
+	
 //	public static void main(String [] args) throws IOException {
 //		File imageFile = new File("C:\\Users\\suprm\\test.png");
 //		BufferedImage image = ImageIO.read(imageFile);

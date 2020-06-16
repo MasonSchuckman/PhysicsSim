@@ -10,6 +10,7 @@ public class presets {
 	public static WorldCreator uni;
 	public static ArrayList<TrackingPoint>trackers;
 	public static int [] camPos;
+	
 	//each preset calls this method so that with future additions, no null pointer exceptions
 	//are thrown when attempting to access a feature that was not yet present when the preset was made.
 	public static void initializePreqs() { 
@@ -25,35 +26,38 @@ public class presets {
 		float bounce  = 1; 
 		float drag    = 0;		
 		int locX,locY,locZ;		
-		int dis        = 500;			
+		int dis        = 20;			
 		float mainMass= 1000000;	
 		
 		int worldSize  = 0;		
 		
 		if(worldSize!=0) { locX=worldSize/2;locY=worldSize/2;locZ=worldSize/2; } 
 		else { locX=1000;locY=1000;locZ=1000; }		
-		list.add(new Freebody(0, 1,mainMass,locX,locY,locZ,     (int)(size)*10, bounce, 0)); 
-		//list.add(new Freebody(50, 1,1,locX+dis,locY,locZ,     (int)(size)*1, bounce, 1)); 
-		//list.add(new Freebody(50, 1,1,locX-dis,locY,locZ,     (int)(size)*1, bounce, 1)); 
+//		list.add(new Freebody(0, 1,1,locX,locY,locZ,     (int)(size)*1, bounce, 0,list.size())); 
+//		
+//		list.add(new Freebody(0, 1,1,locX+dis,locY,locZ,     (int)(size)*1, bounce, 0,list.size())); 
+//		list.add(new Freebody(0, 1,1,locX+dis/2,locY+dis/2,locZ,     (int)(size)*1, bounce, 0,list.size()));
+//		list.add(new Freebody(0, 1,1,locX+dis/2,locY-dis/2,locZ,     (int)(size)*1, bounce, 0,list.size()));
 		//trackers.add(new TrackingPoint(locX,locY,locZ,    (int)(size),0));//controller 1
 		//trackers.add(new TrackingPoint(locX+dis,locY,locZ,(int)(size),1));//controller 2	
 		//trackers.get(0).makeLightsaber();
+		
 		boolean usingShapeCreator=true;
 		if(usingShapeCreator) {
 			ShapeCreator s=new ShapeCreator();
-			int spacer=1;
+			int spacer=20;
 			int[][]p=s.getPoints(spacer);
-			int multi=10;
+			int multi=2;
 			int x=0;
 			int y=0;
 			int num=0;
 			int xmax=0;
 			int ymax=0;
 			for(int i[]:p) {
-				num++;
-				list.add(new Freebody(0, 0,1,locX+(i[0]*multi),locY+(i[1]*multi),locZ,(int)(size)*1, bounce, 0)); 
-				list.get(num).setVel(0,0,350);
 				
+				list.add(new Freebody(0, 0,1,locX+(i[0]*multi),locY+(i[1]*multi),locZ,(int)(size)*1, bounce, 0,list.size())); 
+				list.get(num).setVel(0,0,300);
+				num++;
 				x+=i[0]*multi;
 				y+=i[1]*multi;
 				xmax=Math.max(xmax, i[0]*multi);
@@ -65,12 +69,13 @@ public class presets {
 			camPos[0]=locX+xAvg;
 			camPos[1]=locY+yAvg;
 			camPos[2]=locZ+(int)(xmax/1.3);
-			uni = new WorldCreator(worldSize, worldSize, worldSize, 0,2.3f,locX+xAvg,locY+yAvg,locZ+(int)(xmax/1.3));
+			uni = new WorldCreator(worldSize, worldSize, worldSize, 0,1f,locX+xAvg,locY+yAvg,locZ+(int)(xmax/1.3));
+			System.out.println(camPos[0]+"  "+camPos[1]+ "  "+camPos[2]);
 		}else
-			uni = new WorldCreator(worldSize, worldSize, worldSize, 0,1,locX,locY,locZ);
+			uni = new WorldCreator(worldSize, worldSize, worldSize, 0,4,locX,locY,locZ);
 		
 		
-		//uni.collisions(true);		//turns on object/object collisions
+		uni.collisions(true);		//turns on object/object collisions
 		
 		return list;
 	}
@@ -539,7 +544,7 @@ public class presets {
 		            else { locX=2500;locY=2500;locZ=2500; }
 		
 		//Black hole
-		list.add(new Freebody(0, 0, mainMass,  locX,locY,locZ, (int)(size)*10, bounce, drag));
+		//list.add(new Freebody(0, 0, mainMass,  locX,locY,locZ, (int)(size)*10, bounce, drag));
 		
 		//below is secondary masses creation
 		//z axis offset
@@ -654,7 +659,7 @@ public class presets {
 		int ang=30;
 		
 		//variable to make it easier to change the # of particles
-		int c=80; 
+		int c=20; 
 		
 		//make symmetry with 1000 open space on both sides
 		//worldsize-2000=usable space
@@ -759,14 +764,14 @@ public class presets {
 		for(int i=0; i<c; i++) {
 			for(int j=0; j<c*2;j++) {
 				for(int k=0; k<2;k++) { 
-					list.add(new Freebody(-sped, ang, 1, start+(int)(d*j), (int)(i*d+yStart), (int)(-k*d)+(locZ -1000), size,  bounce, 0.0001f));
+					list.add(new Freebody(-sped, ang, 1, start+(int)(d*j), (int)(i*d+yStart), (int)(-k*d)+(locZ -1000), size,  bounce, 0.1f));
 				}
 			}
 		}
 		for(int i=0; i<c; i++) {
 			for(int j=0; j<c*2;j++) {
 				for(int k=0; k<2;k++) {
-					list.add(new Freebody( sped, ang, 1, start+(int)(d*j), (int)(i*d+yStart), (int)(k*d)+(locZ +1000), size, bounce, 0.0001f));
+					list.add(new Freebody( sped, ang, 1, start+(int)(d*j), (int)(i*d+yStart), (int)(k*d)+(locZ +1000), size, bounce, 0.1f));
 				}
 			}
 		}

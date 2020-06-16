@@ -162,7 +162,7 @@ public class customUtils {
 			t.makeSphere();	
 			Sphere s = t.ball;
 			
-			//sets the color of all the balls to the randomized values at each object's declaration
+			
 			PhongMaterial ballColor = new PhongMaterial();		    
 		    ballColor.setSpecularColor(t.fxColor);
 		    ballColor.setDiffuseColor(t.fxColor);		    

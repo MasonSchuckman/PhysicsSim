@@ -16,7 +16,7 @@ public class Octree {
 	//{ {root x, root x+size(of the tree) },{root y, root y+size(of the tree)}, ...	
 	final int MIN_SIZE=10;
 	final int minObs=2; // the minimum number of objects in an octant to justify making a new octree node
-	final int minSizeToShow=50; //if an octant is smaller than 100, then don't draw it.
+	final int minSizeToShow=100; //if an octant is smaller than 100, then don't draw it.
 	int size;
 	int [][][]octantBounds=new int[8][3][2];//this will store the bounding boxes for all of the octants.
 	//octants go in this order(if looking at a cube face on):
@@ -101,14 +101,12 @@ public class Octree {
 			int removing=delist.pop().intValue();
 			obs.remove(removing);
 		}
-
-
 	}
 	public boolean insideOfBounds(float [] objectPosition,int[][]bounds,int rad) {
 		if(
-				bounds[0][0]+rad<objectPosition[0]&&bounds[0][1]>objectPosition[0]+rad&& //checked the x position
-				bounds[1][0]+rad<objectPosition[1]&&bounds[1][1]>objectPosition[1]+rad&& //checked the y position
-				bounds[2][0]+rad<objectPosition[2]&&bounds[2][1]>objectPosition[2]+rad   //checked the z position
+				bounds[0][0]-rad<objectPosition[0]&&bounds[0][1]>objectPosition[0]+rad&& //checked the x position
+				bounds[1][0]-rad<objectPosition[1]&&bounds[1][1]>objectPosition[1]+rad&& //checked the y position
+				bounds[2][0]-rad<objectPosition[2]&&bounds[2][1]>objectPosition[2]+rad   //checked the z position
 
 				/*
 				 * New optimization: 

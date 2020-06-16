@@ -17,7 +17,7 @@ public class start {
 		//use presets.<preset here> to make the objects and universe.
 		//use .manEdit in to make new presets
 		//use .testing in to test various things
-		//list=presets.preset2();
+		//list=presets.preset3();
 		list=presets.testing();		
 		//list=presets.manEdit();	
 		System.out.println("Objects in simulation: "+list.size()); //prints the particles in the simulation

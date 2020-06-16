@@ -58,7 +58,8 @@ public class Vector3d {
 		this.setZ(z);		
 	}
 
-
+	
+	
 	public float dot(Vector3d v2)
 	{
 		float result = 0.0f;

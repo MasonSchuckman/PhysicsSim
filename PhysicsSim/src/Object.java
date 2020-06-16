@@ -51,7 +51,7 @@ public class Object implements Cloneable
 	
 
     public void makeSphere() {
-	   ball=new Sphere(w);
+	   ball=new Sphere(w,4);
    }
    public Sphere getSphere() {
 	   return ball;
@@ -60,6 +60,7 @@ public class Object implements Cloneable
 	   ball.setTranslateX(position.getX());
 	   ball.setTranslateY(position.getY());
 	   ball.setTranslateZ(position.getZ());
+	   
    }
    
     public void addHit(int obj, int iteration)
